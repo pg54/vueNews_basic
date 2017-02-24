@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<meta name="viewpo">-->
+    <meta http-equiv="x-ua-compatible" content="id=edge">
+    <!--<script src="http://7xo5hi.com1.z0.glb.clouddn.com/jquery-2.2.3.min.js"></script>-->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+    <!--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"-->
+    <!--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"-->
+    <!--crossorigin="anonymous"></script>-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./css/index.css" type="text/css">
+    <title>Vuejs Bootstrap demo</title>
+</head>
+<body>
+<div id="app">
+    <div class="block">
+        <label for="md_name">media name</label>
+        <select v-for="media in medias" id="md_name">
+            <option v-bind:value="media.name"> {{ media.name }}</option>
+        </select>
+    </div>
+    <!--这里能不能采用v-model或者{{ ok ? 'YES' : 'NO' }}将上面选择的媒体名自动转换成urlKey-->
+    <!--<p> {{media.urlKey }} </p>-->
+    <div class="block">
+        <label for="md_sort">media</label>
+        <select id="md_sort">
+            <option value="top">top</option>
+            <option value="latest">latest</option>
+        </select>
+    </div>
+
+    <div class="block">
+        <button @click="sendMSG">send MSG</button>
+    </div>
+    
+</div>
+
+<script>
+    var app = new Vue({
+        ele:'#app',
+        data: {
+            medias: [
+                {
+                    name:'ABC News (AU)'
+                },
+                   {
+                    name:'Ars Technica'
+                },
+                   {
+                    name:'Associated Press'
+                },
+                   {
+                    name:'BBC News'
+                },
+                   {
+                    name:'BBC Sport'
+                },
+                   {
+                    name:'Bild'
+                },
+                   {
+                    name:'Bloomberg'
+                }
+
+            ]
+        },
+        sendMSG:function () {
+            var name = document.getElementById('md_name');
+            getUrlKey(name);
+            function getUrlKey(str) {
+                if (str === 'ABC News (AU)') {
+                    return 'abc-news-au';
+                } else {
+                    console.log(str.toLowerCase().replace(/\s/g,'-'));
+                    return str.toLowerCase().replace(/\s/g,'-');
+                }
+            }
+        }
+    })
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
